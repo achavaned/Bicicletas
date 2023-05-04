@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+{% block content %}
+  <h1>Lista de bicicletas</h1>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Modelo</th>
+          <th>Color</th>
+          <th>Ubicacion</th>
+          <th>Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for bike in bikes %}
+        <tr>
+          <td>{{ bike._id }}</td>
+          <td>{{ bike.model }}</td>
+          <td>{{ bike.color }}</td>
+          <td>{{ bike.ubicacion['longitud'] }} , {{ bike.ubicacion['latitud'] }}</td>
+          <td><a href="{{ url_for('update_bike_form', id=bike._id) }}" class="btn btn-primary">Editar</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

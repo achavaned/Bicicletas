@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h1 class="mb-4">Crear Bicicleta</h1>
+    <form method="POST" action="{{ url_for('create_bike') }}">
+      <div class="mb-3">
+        <label for="model" class="form-label">Modelo</label>
+        <input type="text" name="model" id="model" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="color" class="form-label">Color</label>
+        <input type="text" name="color" id="color" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="longitud" class="form-label">Longitud</label>
+        <input type="text" name="longitud" id="longitud" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="latitud" class="form-label">Latitud</label>
+        <input type="text" name="latitud" id="latitud" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">Crear</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

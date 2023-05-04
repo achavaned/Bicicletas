@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Bicicletas</title>
+      <style>
+         /* Estilos para la barra de navegación */
+         nav {
+         background-color: #333;
+         color: #fff;
+         }
+         nav ul {
+         margin: 0;
+         padding: 0;
+         list-style: none;
+         overflow: hidden;
+         }
+         nav li {
+         float: left;
+         }
+         nav a {
+         display: block;
+         padding: 1em;
+         color: #fff;
+         text-decoration: none;
+         }
+         nav a:hover {
+         background-color: #fff;
+         color: #333;
+         }
+         /* Estilos para el contenido */
+         body {
+         margin: 0;
+         padding: 0;
+         }
+         h1 {
+         margin-top: 1em;
+         margin-bottom: 0.5em;
+         }
+         table {
+         border-collapse: collapse;
+         width: 100%;
+         }
+         th, td {
+         text-align: left;
+         padding: 8px;
+         }
+         th {
+         background-color: #ddd;
+         }
+         tr:nth-child(even) {
+         background-color: #f2f2f2;
+         }
+         /* Estilos para el formulario */
+         form {
+         margin-top: 1em;
+         }
+         label {
+         display: block;
+         margin-bottom: 0.5em;
+         }
+         input[type="text"],
+         textarea {
+         display: block;
+         width: 100%;
+         padding: 0.5em;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+         box-sizing: border-box;
+         margin-bottom: 1em;
+         }
+         button[type="submit"] {
+         background-color: #4CAF50;
+         color: white;
+         padding: 12px 20px;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+         }
+         button[type="submit"]:hover {
+         background-color: #45a049;
+         }
+      </style>
+   </head>
+   <body>
+      <nav>
+         <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/bicicletas">Lista de bicicletas</a></li>
+            <li><a href="/create">Crear bicicleta</a></li>
+         </ul>
+      </nav>
+      {% block content %}{% endblock %}
+   </body>
+</html>
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Crear Bicicleta</title>
+   </head>
+   <body>
+      <h1>Crear Bicicleta</h1>
+      <form method="POST" action="{{ url_for('create_bike') }}">
+         <label for="model">Modelo</label>
+         <input type="text" name="model" id="model" required>
+         <label for="color">Color</label>
+         <input type="text" name="color" id="color" required>
+         <label for="longitud">Longitud</label>
+         <input type="text" name="longitud" id="longitud" required>
+         <label for="latitud">Latitud</label>
+         <input type="text" name="latitud" id="latitud" required>
+         <button type="submit">Crear</button>
+      </form>
+   </body>
+</html>
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Editar bicicleta</title>
+   </head>
+   <body>
+      <h1>Editar bicicleta</h1>
+      <form method="GET" action="{{ url_for('update_bike', id=bike._id) }}">
+         <label for="name">Modelo</label>
+         <input type="text" name="model" id="model" value="{{ bike.model }}" required>
+         <label for="description">Color</label>
+         <textarea name="color" id="color" required>{{ bike.color }}</textarea>
+         <label for="description">Longitud</label>
+         <textarea name="longitud" id="longitud" required>{{ bike.ubicacion['longitud'] }}</textarea>
+         <label for="description">Latitud</label>
+         <textarea name="latitud" id="latitud" required>{{ bike.ubicacion['latitud'] }}</textarea>
+         <button type="submit">Guardar</button>
+      </form>
+   </body>
+</html>
+
+
+{% extends 'index.html' %}
+{% block content %}
+<h1>Lista de bicicletas</h1>
+<table>
+   <thead>
+      <tr>
+         <th>ID</th>
+         <th>Modelo</th>
+         <th>Color</th>
+         <th>Ubicacion</th>
+         <th>Accion</th>
+      </tr>
+   </thead>
+   <tbody>
+      {% for bike in bikes %}
+      <tr>
+         <td>{{ bike._id }}</td>
+         <td>{{ bike.model }}</td>
+         <td>{{ bike.color }}</td>
+         <td>{{ bike.ubicacion['longitud'] }} , {{ bike.ubicacion['latitud'] }}</td>
+         <td><a href="{{ url_for('update_bike_form', id=bike._id) }}">Editar</a></td>
+      </tr>
+      {% endfor %}
+   </tbody>
+</table>
+{% endblock %}
