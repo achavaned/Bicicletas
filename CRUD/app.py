@@ -30,7 +30,8 @@ def test():
 # Define CRUD operations
 @app.route('/bicicletas', methods=['GET'])
 def get_bikes():
-    bikes = list(db.db.collection.find())
+    col = db.db.collection.find()
+    bikes = list(col)
     return render_template('bikes.html', bikes=bikes)
 '''
 @app.route('/documents', methods=['POST'])
@@ -45,9 +46,35 @@ def get_bikes_api():
     return jsonify({'data': parse_json(bikes)})
 
 @app.route('/bicicletas/api/<id>', methods=['GET'])
-def get_bike(id):
+def get_bike_api(id):
     document = db.db.collection.find_one({'_id': ObjectId(id)})
     return jsonify({'data': parse_json(document)})
+
+@app.route('/bicicletas/api/create', methods=['POST'])
+def create_bike_api():
+    data = request.json
+    result = db.db.collection.insert_one(data)
+    return jsonify({'Message': 'Created'})
+
+@app.route('/bicicletas/api/select/<id>', methods=['POST'])
+def select_bike_api(id):
+    data = db.db.collection.find_one({'_id': ObjectId(id)})
+    result = db.db.selection.insert_one(data)
+    return jsonify({'Message': 'Selected'})
+
+@app.route('/bicicletas/api/update/<id>', methods=['PUT'])
+def update_bike_api(id):
+    data = request.json
+    result = db.db.collection.update_one({'_id': ObjectId(id)}, {'$set': data})
+    return jsonify({'Message': 'Updated'})
+
+@app.route('/bicicletas/api/delete/<id>', methods=['DELETE'])
+def delete_bike_api(id):
+    result = db.db.collection.delete_one({'_id': ObjectId(id)})
+    if result.deleted_count == 1:
+        return jsonify({'mensaje': 'Registro eliminado exitosamente'})
+    else:
+        return jsonify({'error': 'No se pudo eliminar el registro'}), 500
 
 @app.route('/create', methods=['GET'])
 def create_bike_form():
@@ -91,3 +118,6 @@ def delete_bike(id):
 
 if __name__ == '__main__':
     app.run(port=8000)
+    
+#docker build -t CRUD .
+#docker run -p 8000:8000 CRUD

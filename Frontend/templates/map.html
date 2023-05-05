@@ -1,0 +1,15 @@
+{% block content %}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-YVZ1QzbRcd7VopYId/t/0j96i9tGyHtVzSyGjpkPm/cOZJxHTZwEKYkQ5Oks7E9Pki5og87iFJd2QHNhA7Kjxw==" crossorigin=""/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-3/vHsPzLsJwnyX9vQ8kIkW6g/UG1/12hVo92c+Z8MkPz25BhY0FY1X2vA8W7dJ2Q6OJDbukLrkx/xZaovmCJyw==" crossorigin=""></script>
+<div id="map" style="width: 100%; height: 500px;"></div>
+<script>
+   var map = L.map('map').setView([45.5236, -122.6750], 13);
+   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+       attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+       maxZoom: 18,
+   }).addTo(map);
+   {{ map|safe }}
+</script>
+{% endblock %}
