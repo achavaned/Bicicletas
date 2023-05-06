@@ -1,5 +1,5 @@
-# Imagen base
-FROM tiangolo/uwsgi-nginx-flask:python3.8
+# Imagen base tiangolo/uwsgi-nginx-flask:python3.8
+FROM python:3.10
 
 # Crear un directorio para nuestra aplicación
 WORKDIR /app

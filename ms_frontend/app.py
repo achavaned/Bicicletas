@@ -3,8 +3,8 @@ import requests
 
 app = Flask(__name__)
 
-MAP_ROOT = 'http://map:8002' #http://127.0.0.1:8002
-CRUD_ROOT = 'http://crud:8000' #http://127.0.0.1:8000
+MAP_ROOT = 'http://map:8002'
+CRUD_ROOT = 'http://crud:8000'
 #MAP_ROOT = 'http://127.0.0.1:8002'
 #CRUD_ROOT = 'http://127.0.0.1:8000'
 
