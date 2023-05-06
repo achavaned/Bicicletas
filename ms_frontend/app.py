@@ -7,10 +7,19 @@ MAP_ROOT = 'http://map:8002'
 CRUD_ROOT = 'http://crud:8000'
 #MAP_ROOT = 'http://127.0.0.1:8002'
 #CRUD_ROOT = 'http://127.0.0.1:8000'
-
+'''
 @app.route('/')
 def index():
     return render_template('index.html')
+'''
+@app.route('/')
+def index():
+    response = requests.get(CRUD_ROOT+'/bicicletas/seleccionadas/api')
+    json_data = response.json()
+    bikes = list(json_data.get('data'))
+    index_view = render_template('index.html')
+    info_view = render_template('info.html', bikes=bikes)
+    return f"{index_view}\n{info_view }"
 
 @app.route('/mapa')
 def get_map():

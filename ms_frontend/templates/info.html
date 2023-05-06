@@ -1,0 +1,39 @@
+{% block content %}
+<style>
+    .card-hover:hover .card-text {
+      display: block;
+    }
+
+    .card-text {
+      display: none;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">INTRODUCCION</h2>
+            <p class="lead text-center">Aquí encontrarás una selección de nuestras bicicletas listas para ser recogidas. ¡No pierdas la oportunidad de tener la tuya!</p>
+            <p class="lead text-center">Podrás crear bicicletas en la sección de 'Crear' y ver la lista completa de bicicletas en la sección 'Lista'.</p>
+            <p class="lead text-center">En la lista completa podrás editar las bicicletas creadas y eliminarlas si así lo deseas.</p>
+            <p class="lead text-center">Al 'seleccionar' una bicicleta, estará disponible para ser recogida y se podrá visualizar en el mapa en la sección de 'Mapa'.</p>
+        </div>
+    </div>
+    <h1 class="text-center">Bicicletas a recoger!</h1>
+    <div class="row">
+      {% for bike in bikes[:3] %}
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm card-hover">
+          <div class="card-body">
+            <h5 class="card-title">{{ bike.model }}</h5>
+            <p class="card-text"><strong>Color:</strong> {{ bike.color }}</p>
+            <p class="card-text"><strong>Ubicación:</strong> {{ bike.ubicacion['longitud'] }} , {{ bike.ubicacion['latitud'] }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% if bikes|length > 3 %}
+    <p class="text-center"><a href="#" class="btn btn-primary">Ver más bicicletas</a></p>
+    {% endif %}
+</div>
+{% endblock %}

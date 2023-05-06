@@ -45,6 +45,11 @@ def get_bikes_api():
     bikes = list(db.db.collection.find())
     return jsonify({'data': parse_json(bikes)})
 
+@app.route('/bicicletas/seleccionadas/api', methods=['GET'])
+def get_selected_bikes_api():
+    bikes = list(db.db.selection.find().limit(3))
+    return jsonify({'data': parse_json(bikes)})
+
 @app.route('/bicicletas/api/<id>', methods=['GET'])
 def get_bike_api(id):
     document = db.db.collection.find_one({'_id': ObjectId(id)})
