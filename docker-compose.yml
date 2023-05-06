@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  frontend: 
+    build: ms_frontend
+    ports: 
+      - 4000:8001
+
+  crud:
+    build: ms_crud
+
+  map:
+    build: ms_map

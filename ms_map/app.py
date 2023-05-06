@@ -35,7 +35,7 @@ def selected():
     return map
 
 if __name__ == '__main__':
-    app.run(port=8002)
+    app.run(host='0.0.0.0', port=8002)
     
 #docker build -t Map .
 #docker run -p 8002:8002 Map

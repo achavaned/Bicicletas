@@ -117,7 +117,7 @@ def delete_bike(id):
     return jsonify({'deleted_count': result.deleted_count})
 
 if __name__ == '__main__':
-    app.run(port=8000)
+    app.run(host='0.0.0.0', port=8000)
     
 #docker build -t CRUD .
 #docker run -p 8000:8000 CRUD

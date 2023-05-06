@@ -1,5 +1,5 @@
 # Imagen base
-FROM python:3.8
+FROM tiangolo/uwsgi-nginx-flask:python3.8
 
 # Crear un directorio para nuestra aplicación
 WORKDIR /app
@@ -12,7 +12,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Exponer el puerto
-EXPOSE 8001
+EXPOSE 8000
 
 # Especificar el comando para iniciar la aplicación
 CMD ["python", "app.py"]
